@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "../hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="datos">
+
+<class name="datos.Ticket" table="ticket">
+    <id column="idTicket" name="idTicket">
+      <generator class="identity"/>
+    </id>
+    <property column="titulo" name="titulo" type="string"/>
+    <property column="descripcion" name="descripcion" type="string"/>
+    <property column="fechaCreacion" name="fechaCreacion" type="LocalDate"/>
+    <property column="estado" name="estado" type="string"/>
+	<many-to-one name="usuarioCreador" class="Usuario" column="idUsuario" not-null="true"/>
+		<many-to-one name="empleadoAsignado" class="Empleado" column="idEmpleado" not-null="true"/>
+    
+
+    
+  </class>    
+</hibernate-mapping>
