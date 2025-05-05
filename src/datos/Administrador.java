@@ -7,6 +7,10 @@ public class Administrador extends Usuario {
 			String contraseña) {
 		super(nombre, apellido, dni, email, nombreUsuario, contraseña);
 	}
+	
+	public Administrador() {
+		
+	}
 
 	public int getIdAdministrador() {
 		return idAdministrador;
@@ -14,6 +18,11 @@ public class Administrador extends Usuario {
 
 	private void setIdAdministrador(int idAdministrador) {
 		this.idAdministrador = idAdministrador;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Administrador [idAdministrador=" + idAdministrador + "]";
 	}
 	
 	

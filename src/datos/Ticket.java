@@ -76,6 +76,13 @@ public class Ticket {
 	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
 		this.empleadoAsignado = empleadoAsignado;
 	}
+
+	@Override
+	public String toString() {
+		return "Ticket [idTicket=" + idTicket + ", titulo=" + titulo + ", descripcion=" + descripcion
+				+ ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + ", usuarioCreador=" + usuarioCreador
+				+ ", empleadoAsignado=" + empleadoAsignado + "]";
+	}
 	
 	
 	

@@ -11,6 +11,10 @@ public class Usuario extends Persona {
 		this.nombreUsuario = nombreUsuario;
 		this.contraseña = contraseña;
 	}
+	
+	public Usuario() {
+		
+	}
 
 	public int getIdUsuario() {
 		return idUsuario;
@@ -34,6 +38,12 @@ public class Usuario extends Persona {
 
 	private void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + super.toString() + ", nombreUsuario=" + nombreUsuario + ", contraseña=" + contraseña
+				+ "]";
 	}
 	
 	

@@ -12,6 +12,10 @@ public class Empleado extends Usuario {
 		super(nombre, apellido, dni, email, nombreUsuario, contraseña);
 		this.tickets = new ArrayList<Ticket>();
 	}
+	
+	public Empleado() {
+		
+	}
 
 	public int getIdEmpleado() {
 		return idEmpleado;
@@ -27,6 +31,11 @@ public class Empleado extends Usuario {
 
 	private void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Empleado [idEmpleado=" + idEmpleado + ", tickets=" + tickets + "]";
 	}
 	
 	
