@@ -1,9 +1,12 @@
 package datos;
 
 public class Usuario extends Persona {
+
 	private int idUsuario;
 	private String nombreUsuario;
 	private String contraseña;
+	
+	public Usuario(){}
 	
 	public Usuario(String nombre, String apellido, String dni, String email,
 			String nombreUsuario, String contraseña) {
@@ -28,7 +31,7 @@ public class Usuario extends Persona {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	private String getContraseña() {
+	public String getContraseña() {
 		return contraseña;
 	}
 
@@ -36,7 +39,10 @@ public class Usuario extends Persona {
 		this.contraseña = contraseña;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Usuario [nombreUsuario=" + nombreUsuario + ", contraseña=" + contraseña + "]";
+	}
 	
 	
 }

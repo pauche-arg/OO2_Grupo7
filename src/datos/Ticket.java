@@ -11,6 +11,8 @@ public class Ticket {
 	private Usuario usuarioCreador;
 	private Empleado empleadoAsignado;
 	
+	public Ticket() {}
+	
 	public Ticket(String titulo, String descripcion, LocalDate fechaCreacion, String estado,
 			Usuario usuarioCreador, Empleado empleadoAsignado) {
 		this.titulo = titulo;
@@ -75,6 +77,13 @@ public class Ticket {
 
 	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
 		this.empleadoAsignado = empleadoAsignado;
+	}
+
+	@Override
+	public String toString() {
+		return "Ticket [titulo=" + titulo + ", descripcion=" + descripcion + ", fechaCreacion=" + fechaCreacion
+				+ ", estado=" + estado + ", usuarioCreador=" + usuarioCreador + ", empleadoAsignado=" + empleadoAsignado
+				+ "]";
 	}
 	
 	

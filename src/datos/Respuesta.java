@@ -8,6 +8,8 @@ public class Respuesta {
 	private LocalDate fecha;
 	private Ticket ticket;
 	
+	public Respuesta() {}
+	
 	public Respuesta(String contenido, LocalDate fecha, Ticket ticket) {
 		this.contenido = contenido;
 		this.fecha = fecha;
@@ -44,6 +46,11 @@ public class Respuesta {
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+	@Override
+	public String toString() {
+		return "Respuesta [contenido=" + contenido + ", fecha=" + fecha + ", ticket=" + ticket + "]";
 	}
 	
 	

@@ -7,6 +7,8 @@ public class Persona {
 	private String dni;
 	private String email;
 	
+	public Persona() {}
+	
 	public Persona(String nombre, String apellido, String dni, String email) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -44,6 +46,11 @@ public class Persona {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email=" + email + "]";
 	}
 	
 	
