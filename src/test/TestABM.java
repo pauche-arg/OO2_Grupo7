@@ -1,0 +1,131 @@
+package test;
+
+import negocio.*;
+
+import datos.*;
+
+import java.time.LocalDate;
+
+import dao.HibernateUtil;
+
+public class TestABM {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		UsuarioABM usuarioABM = new UsuarioABM();
+        EmpleadoABM empleadoABM = new EmpleadoABM();
+        AdministradorABM administradorABM = new AdministradorABM();
+        TicketABM ticketABM = new TicketABM();
+        RespuestaABM respuestaABM = new RespuestaABM();
+        
+		
+		System.out.println(HibernateUtil.getSessionFactory());
+        /*
+        try {
+            System.out.println("=== AGREGANDO USUARIO ===");
+            int idUsuario = usuarioABM.agregar("Juan", "Pérez", "11111111", "juan@mail.com", "juanito", "1234");
+            System.out.println(usuarioABM.traerUsuarios());
+            System.out.println("Usuario agregado con ID: " + idUsuario);
+            
+        	System.out.println("=== MODIFICANDO USUARIO ===");
+            Usuario u = usuarioABM.traer(idUsuario);
+            u.setEmail("nuevo_correo@mail.com");
+            usuarioABM.modificar(u);
+            System.out.println("Usuario modificado.");
+
+            System.out.println("=== LISTA DE USUARIOS ===");
+            System.out.println(usuarioABM.traerUsuarios());
+
+            System.out.println("=== LISTA DE EMPLEADOS ===");
+            System.out.println(empleadoABM.traerEmpleados());
+            
+           //System.out.println("=== ELIMINANDO USUARIO ===");
+            //usuarioABM.eliminar(idUsuario);
+            //System.out.println("Usuario eliminado.");
+
+
+        } catch (Exception e) {
+            System.out.println("Error durante test: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        try {
+            System.out.println("=== AGREGANDO EMPLEADO ===");
+            //int idEmpleado = empleadoABM.agregar("Ana", "García", "87654321", "ana@mail.com", "anita", "abcd");
+            int idEmpleado = empleadoABM.agregar("Maria", "Lopez", "12345679", "maria@mail.com", "mary", "cxfg");
+
+            System.out.println("Empleado agregado con ID: " + idEmpleado);
+            System.out.println(empleadoABM.traer(idEmpleado));
+            /*System.out.println("=== ELIMINANDO EMPLEADO ===");
+            empleadoABM.eliminar(idEmpleado);
+            System.out.println("Empleado eliminado.");
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error durante test: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        try {
+        	
+        	System.out.println("=== AGREGANDO ADMINISTRADOR ===");
+        	 int idAdministrador = empleadoABM.agregar("Ricardo", "Perez", "34642378", "ricardo@mail.com", "ricardito", "fghj");
+        	 
+        	 System.out.println("Administrador agregado con ID: " + idAdministrador);
+
+        } catch (Exception e) {
+            System.out.println("Error durante test: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        */
+        try {
+        	
+        	System.out.println("=== AGREGANDO TICKET ===");
+        	
+        	System.out.println(usuarioABM.traer("11111111"));
+        	Usuario usuarioTest = usuarioABM.traer("11111111");
+        	Empleado empleadoTest = empleadoABM.traer("12345679");
+        	
+        	/*int idTicket = ticketABM.agregar("test", "t", usuarioTest);
+        	int idTicket2 = ticketABM.agregar("test2", "t2", usuarioTest);
+        	int idTicket3 = ticketABM.agregar("test3", "t3", usuarioTest);
+        	int idTicket4 = ticketABM.agregar("test4", "t4", usuarioTest);
+        	
+        	
+	    	System.out.println("Ticket agregado con ID: " + idTicket);/
+	    	 */
+        	AdministradorABM admin = new AdministradorABM();
+        	//admin.agregar("admin", "admin", "99999999", "ad_min@gmail.com", "admin200", "1234567");
+        	Administrador admin2 = admin.traer(4);
+        	System.out.println("administrador ");
+        	System.out.println(admin2);
+        	//admin.asignarTicket(4, empleadoTest);
+	        System.out.println("=== LISTA DE TICKETS ===");
+	        System.out.println(ticketABM.traerTickets());
+	        
+	        //empleadoABM.cambiarEstado(4, empleadoTest);
+	        System.out.println("filtrado");
+	        System.out.println(ticketABM.traerFiltrado("resuelto"));
+
+        } catch (Exception e) {
+            System.out.println("Error durante test: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        /*try {
+        	System.out.println("=== AGREGANDO RESPUESTA ===");
+        	
+        	int idRespuesta = respuestaABM.agregar("aaa", LocalDate.of(2025, 5, 10), ticketABM.traerTicket(1));
+        	
+        	 System.out.println("Respuesta agregada con ID: " + idRespuesta);
+
+
+        } catch (Exception e) {
+            System.out.println("Error durante test: " + e.getMessage());
+            e.printStackTrace();
+        }*/
+        
+    }
+}

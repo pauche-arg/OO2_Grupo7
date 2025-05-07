@@ -14,11 +14,11 @@
     <property column="contraseña" name="contraseña" type="string"/>
     
     <joined-subclass name="Empleado" table="empleado" extends="Usuario">
-        <key column="id"/>
+       <key column="idUsuario"/>
     </joined-subclass>
     
      <joined-subclass name="Administrador" table="administrador" extends="Usuario">
-        <key column="id"/>
+        <key column="idUsuario"/>
     </joined-subclass>
     
   </class>    

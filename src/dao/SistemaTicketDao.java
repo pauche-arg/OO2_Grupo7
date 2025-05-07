@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 
 import datos.Ticket;
 import datos.Usuario;
-import negocio.TicketAbm;
+import negocio.TicketABM;
 
 public class SistemaTicketDao {
 	private static Session session;
@@ -24,8 +24,9 @@ public class SistemaTicketDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 	
-	public int generarTicket(Usuario objeto, String titulo, String desc) {
-		return new TicketAbm().agregar(titulo,desc,objeto);
-	}
+	/*public int generarTicket(Usuario objeto, String titulo, String desc) throws Exception {
+		TicketABM abm = new TicketABM();
+		return abm.agregar(titulo, desc, LocalDate.now(), "abierto", objeto, null);
+	}*/
 
 }

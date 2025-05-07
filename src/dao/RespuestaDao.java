@@ -6,9 +6,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Usuario;
+import datos.Respuesta;
 
-public class UsuarioDao {
+import dao.TicketDao;
+
+public class RespuestaDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -19,10 +21,10 @@ public class UsuarioDao {
 	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		throw new HibernateException("Error en la capa de acceso de datos de UsuarioDao.", he);
+		throw new HibernateException("Error en la capa de acceso de datos de TicketDao.", he);
 	}
 	
-	public int agregar(Usuario objeto) {
+	public int agregar(Respuesta objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -37,7 +39,7 @@ public class UsuarioDao {
 		return id;
 	}
 	
-	public void actualizar(Usuario objeto) {
+	public void actualizar(Respuesta objeto) {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -50,7 +52,7 @@ public class UsuarioDao {
 		}
 	}
 	
-	public void eliminar(Usuario objeto) {
+	public void eliminar(Respuesta objeto) {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -63,36 +65,23 @@ public class UsuarioDao {
 		}
 	}
 	
-	public Usuario traer(int idUsuario) {
-		Usuario objeto = null;
+	public Respuesta traer(int idRespuesta) {
+		Respuesta objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Usuario) session.get(Usuario.class, idUsuario);
+			objeto = (Respuesta) session.get(Respuesta.class, idRespuesta);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public Usuario traer(String dni) {
-		Usuario objeto = null;
+	public List<Respuesta> traer() throws HibernateException {
+		List<Respuesta> lista = null;
 		try {
 			iniciaOperacion();
-			objeto = (Usuario) session.createQuery("FROM Usuario WHERE dni = :dni")
-									  .setParameter("dni", dni)
-									  .uniqueResult();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-	public List<Usuario> traer() throws HibernateException {
-		List<Usuario> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Usuario c order by c.idUsuario asc",
-					Usuario.class).getResultList();
+			lista = session.createQuery("from Respuesta c order by c.idRespuesta asc",
+					Respuesta.class).getResultList();
 		} finally {
 			session.close();
 		}

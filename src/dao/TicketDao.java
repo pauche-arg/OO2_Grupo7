@@ -9,23 +9,111 @@ import org.hibernate.Transaction;
 import datos.Empleado;
 import datos.Ticket;
 import datos.Usuario;
+import dao.UsuarioDao;
+import dao.EmpleadoDao;
 
 public class TicketDao {
 	private static Session session;
 	private Transaction tx;
 	
-	protected void iniciaOperacion() throws HibernateException {
+	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-
-	protected void manejaExcepcion(HibernateException he) throws HibernateException {
+	
+	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		throw new HibernateException("ERROR en la capa de acceso a datos", he);
+		throw new HibernateException("Error en la capa de acceso de datos de TicketDao.", he);
 	}
 	
-	///SIN DETALLES
-	public Ticket traeSinUsuario(int idTicket) {
+	public int agregar(Ticket objeto) {
+		int id = 0;
+		try {
+			iniciaOperacion();
+			
+			System.out.println(objeto.getUsuarioCreador());
+			
+			UsuarioDao usuarioDao = new UsuarioDao();
+			EmpleadoDao empleadoDao = new EmpleadoDao();
+			
+			Usuario usuario = null;
+			Empleado empleado = null;
+	       
+	        
+	        try { 
+	        if (objeto.getUsuarioCreador() != null) {
+	            Integer idUsuario = objeto.getUsuarioCreador().getIdUsuario();
+	            usuario = usuarioDao.traer(idUsuario);
+	            objeto.setUsuarioCreador(usuario);
+	        }
+	        } catch (HibernateException he) {
+	        	manejaExcepcion(he);
+	        }
+	        if (objeto.getEmpleadoAsignado() != null) {
+	            Integer idEmpleado = objeto.getEmpleadoAsignado().getIdUsuario();
+	            empleado = empleadoDao.traer(idEmpleado);
+	            objeto.setEmpleadoAsignado(empleado); // puede seguir siendo null si no lo encuentra, dado que cuando los ticket son creados pueden no tener un empleado asignado ae el
+	        } else {
+	            objeto.setEmpleadoAsignado(null);
+	        }
+			
+			objeto.setUsuarioCreador(usuario);
+			
+			id = Integer.parseInt(session.save(objeto).toString());
+			tx.commit();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			session.close();
+		}
+		return id;
+	}
+	
+	public void actualizar(Ticket objeto) {
+		try {
+			iniciaOperacion();
+			
+			UsuarioDao usuarioDao = new UsuarioDao();
+			EmpleadoDao empleadoDao = new EmpleadoDao();
+			
+			Usuario usuario = usuarioDao.traer(objeto.getUsuarioCreador().getIdUsuario());
+	        Empleado empleado = empleadoDao.traer(objeto.getEmpleadoAsignado().getIdUsuario());
+	        
+	        if (usuario == null) {
+	            throw new IllegalArgumentException("TicketDao: Usuario creador no encontrado.");
+	        }
+	        if (empleado == null) {
+	            throw new IllegalArgumentException("TicketDao: Empleado no encontrado");
+	        }
+			
+			objeto.setUsuarioCreador(usuario);
+			objeto.setEmpleadoAsignado(empleado);
+			
+			session.update(objeto);
+			tx.commit();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			session.close();
+		}
+	}
+	
+	public void eliminar(Ticket objeto) {
+		try {
+			iniciaOperacion();
+			session.delete(objeto);
+			tx.commit();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			session.close();
+		}
+	}
+	
+	public Ticket traer(int idTicket) {
 		Ticket objeto = null;
 		try {
 			iniciaOperacion();
@@ -36,62 +124,27 @@ public class TicketDao {
 		return objeto;
 	}
 	
-	public int agregar(Ticket objeto) {
-		int id = 0;
-		try {
-			iniciaOperacion();
-			id = Integer.parseInt(session.save(objeto).toString());
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			session.close();
-		}
-		return id;
-	}
-	
-	public void eliminar(Ticket objeto) {
-		try {
-			iniciaOperacion();
-			session.delete(objeto);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			session.close();
-		}
-	}
-	
-	///LISTA DE TODOS LOS TICKETS DE UN USUARIO
-	public List<Ticket> traer(Usuario u){
+	public List<Ticket> traer() throws HibernateException {
 		List<Ticket> lista = null;
 		try {
 			iniciaOperacion();
-			String hQl = "from Ticket t inner join fetch t.usuarioCreador u where u.idUsuario";
-			lista = session.createQuery(hQl,Ticket.class).setParameter("idUsuario", u.getIdUsuario()).getResultList();
+			lista = session.createQuery("from Ticket c order by c.idTicket asc",
+					Ticket.class).getResultList();
 		} finally {
 			session.close();
 		}
 		return lista;
 	}
 	
-	////TRAER TICKET CON DETALLES
-	public Ticket traer(int idTicket) {
-		Ticket objeto = null;
+	public List<Ticket> filtrado(String filtro){
+		List<Ticket> lista = null;
 		try {
 			iniciaOperacion();
-			String hQL = "from Ticket t inner join fetch t.usuarioCreador u where t.idTicket=:idTicket";
-			objeto = (Ticket)session.createQuery(hQL).setParameter("idTicket", idTicket).uniqueResult();
+			String hQL = "from Ticket t where t.estado =:filtro order by t.idTicket asc";
+			lista = session.createQuery(hQL, Ticket.class).setParameter("filtro", filtro).getResultList();
 		} finally {
 			session.close();
 		}
-		return objeto;
+		return lista;
 	}
-	
-	public void asignarTicket(int id, Empleado emp) {
-		traeSinUsuario(id).setEmpleadoAsignado(emp);
-	}
-	
-	
-
 }

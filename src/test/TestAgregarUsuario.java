@@ -2,16 +2,15 @@ package test;
 
 import datos.Usuario;
 import negocio.SistemaAbm;
-import negocio.TicketAbm;
-import negocio.UsuarioAbm;
+import negocio.TicketABM;
+import negocio.UsuarioABM;
 
 public class TestAgregarUsuario {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//UsuarioABM abm = new UsuarioABM();
-		SistemaAbm sis = new SistemaAbm();
-		TicketAbm tic = new TicketAbm();
+		TicketABM tic = new TicketABM();
+		UsuarioABM us = new UsuarioABM();
 		/*int ultimoID=0;
 		try {
 			ultimoID = UsuarioAbm.getInstance().agregar("nombre","apellido","12345678","@email","AlexK","15154235");
@@ -22,12 +21,12 @@ public class TestAgregarUsuario {
 		
 		
 		int id=2;
-		//Usuario user1 = UsuarioAbm.getInstance().traer(id);
+		System.out.println(us.traer(1));
+		
 		/*int ultimoIDemp = UsuarioABM.getInstance().agregarEmp("nombre","apellido","12345678","@email","AlexK","15154235");
 		System.out.printf("Id Empleado %d",ultimoIDemp);*/
 		//System.out.println(sis.generarTicket(user1, "title", "cuerpo"));
-		System.out.println(tic.traer(2));
-		System.out.println(tic.traerSinUsuario(id));
+		System.out.println(tic.traerTicket(2));
 	}
 
 }

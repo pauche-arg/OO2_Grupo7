@@ -6,9 +6,13 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Administrador;
+import datos.Empleado;
+import datos.Ticket;
 import datos.Usuario;
+import negocio.TicketABM;
 
-public class UsuarioDao {
+public class AdministradorDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -19,10 +23,10 @@ public class UsuarioDao {
 	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		throw new HibernateException("Error en la capa de acceso de datos de UsuarioDao.", he);
+		throw new HibernateException("Error en la capa de acceso de datos de EmpleadoDao.", he);
 	}
 	
-	public int agregar(Usuario objeto) {
+	public int agregar(Administrador objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -37,7 +41,7 @@ public class UsuarioDao {
 		return id;
 	}
 	
-	public void actualizar(Usuario objeto) {
+	public void actualizar(Administrador objeto) {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -50,7 +54,7 @@ public class UsuarioDao {
 		}
 	}
 	
-	public void eliminar(Usuario objeto) {
+	public void eliminar(Administrador objeto) {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -63,22 +67,22 @@ public class UsuarioDao {
 		}
 	}
 	
-	public Usuario traer(int idUsuario) {
-		Usuario objeto = null;
+	public Administrador traer(int idUsuario) {
+		Administrador objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Usuario) session.get(Usuario.class, idUsuario);
+			objeto = (Administrador) session.get(Administrador.class, idUsuario);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public Usuario traer(String dni) {
-		Usuario objeto = null;
+	public Administrador traer(String dni) {
+		Administrador objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Usuario) session.createQuery("FROM Usuario WHERE dni = :dni")
+			objeto = (Administrador) session.createQuery("FROM Administrador WHERE dni = :dni")
 									  .setParameter("dni", dni)
 									  .uniqueResult();
 		} finally {
@@ -87,15 +91,24 @@ public class UsuarioDao {
 		return objeto;
 	}
 	
-	public List<Usuario> traer() throws HibernateException {
-		List<Usuario> lista = null;
+	public List<Administrador> traer() throws HibernateException {
+		List<Administrador> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Usuario c order by c.idUsuario asc",
-					Usuario.class).getResultList();
+			lista = session.createQuery("from Administrador c order by c.idUsuario asc",
+					Administrador.class).getResultList();
 		} finally {
 			session.close();
 		}
 		return lista;
+	}
+	
+	public void asignarTicket(int idticket, Empleado emp) throws Exception {
+		TicketABM abmti = new TicketABM();
+		Ticket t = abmti.traerTicket(idticket);
+		if(t.getEstado().equalsIgnoreCase("resuelto"))throw new Exception("El ticket ya esta resuelto");
+		t.setEmpleadoAsignado(emp);
+		abmti.modificar(t);
+		System.out.println(t);
 	}
 }

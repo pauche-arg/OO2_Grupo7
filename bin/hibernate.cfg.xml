@@ -11,6 +11,7 @@
 		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property><!-- en true muestra hql en consola-->
+		<property name="connection.pool_size">2</property>
 		<!--Mapeo Entidades   -->
 		<mapping resource="mapeos/Usuario.hbm.xml" />
 		<mapping resource="mapeos/Ticket.hbm.xml"/>

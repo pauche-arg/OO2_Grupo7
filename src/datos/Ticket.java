@@ -11,6 +11,8 @@ public class Ticket {
 	private Usuario usuarioCreador;
 	private Empleado empleadoAsignado;
 	
+	public Ticket() {}
+	
 	public Ticket(String titulo, String descripcion, LocalDate fechaCreacion, String estado,
 			Usuario usuarioCreador, Empleado empleadoAsignado) {
 		this.titulo = titulo;
@@ -19,10 +21,6 @@ public class Ticket {
 		this.estado = estado;
 		this.usuarioCreador = usuarioCreador;
 		this.empleadoAsignado = empleadoAsignado;
-	}
-	
-	public Ticket() {
-		
 	}
 
 	public int getIdTicket() {
@@ -83,9 +81,8 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [idTicket=" + idTicket + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + ", usuarioCreador=" + usuarioCreador
-				+ ", empleadoAsignado=" + empleadoAsignado + "]";
+		return "Ticket [titulo=" + titulo + ", descripcion=" + descripcion + ", fechaCreacion=" + fechaCreacion
+				+ ", estado=" + estado + ", usuarioCreador=" + usuarioCreador + "]\n";
 	}
 	
 	
