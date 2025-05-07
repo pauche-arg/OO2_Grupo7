@@ -20,6 +20,10 @@ public class Ticket {
 		this.usuarioCreador = usuarioCreador;
 		this.empleadoAsignado = empleadoAsignado;
 	}
+	
+	public Ticket() {
+		
+	}
 
 	public int getIdTicket() {
 		return idTicket;

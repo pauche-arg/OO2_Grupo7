@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.List;
 
+import dao.TicketDao;
 import dao.UsuarioDao;
 import datos.Empleado;
 import datos.Usuario;
@@ -28,7 +29,7 @@ public class UsuarioAbm {
 	}
 	
 	public int agregar(String nombre, String apellido, String dni, String email,
-			String nombreUsuario, String contraseña) throws Exception{
+		String nombreUsuario, String contraseña) throws Exception{
 		Usuario u = UsuarioDao.getInstance().traerDni(dni);
 		if(u!=null){
 			throw new Exception("Usuario ya agregado");
@@ -51,6 +52,18 @@ public class UsuarioAbm {
 	
 	public Usuario traerDni(String dni) {
 		return UsuarioDao.getInstance().traerDni(dni);
+	}
+	
+	
+	public void asignarTicket(int id, Empleado emp) {
+		TicketDao dao = new TicketDao();
+		dao.asignarTicket(id, emp);
+	}
+	
+	public void cambiarEstado(int idTicket) {
+		TicketAbm abm = new TicketAbm();
+		abm.traerSinUsuario(idTicket).setEstado("cerrado");
+	
 	}
 
 }

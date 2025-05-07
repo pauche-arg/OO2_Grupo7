@@ -1,12 +1,16 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.Empleado;
+import datos.Ticket;
 import datos.Usuario;
+import negocio.TicketAbm;
 
 public class UsuarioDao {
 	private static Session session;
@@ -42,7 +46,6 @@ public class UsuarioDao {
 		} finally {
 			session.close();
 		}
-		System.out.println(objeto.getDni());
 		return objeto;
 	}
 
@@ -63,7 +66,6 @@ public class UsuarioDao {
 			iniciaOperacion();
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
-			System.out.printf("id %d",id);
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
@@ -122,6 +124,13 @@ public class UsuarioDao {
 		}
 		return objeto;
 	}
+	
+	
+	/*
+	public void asignarTicket(int id, Empleado emp) {
+		TicketAbm abm = new TicketAbm();
+		abm.traerSinUsuario(id).setEmpleadoAsignado(emp);
+	}*/
 
 }
 

@@ -11,7 +11,7 @@
     <property column="fechaCreacion" name="fechaCreacion" type="LocalDate"/>
     <property column="estado" name="estado" type="string"/>
 	<many-to-one name="usuarioCreador" class="Usuario" column="idUsuario" not-null="true"/>
-		<many-to-one name="empleadoAsignado" class="Empleado" column="idEmpleado" not-null="true"/>
+		<many-to-one name="empleadoAsignado" class="Empleado" column="idEmpleado" not-null="false"/>
     
 
     
