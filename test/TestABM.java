@@ -44,7 +44,7 @@ public class TestABM {
             //System.out.println("Usuario eliminado.");
 
             System.out.println("=== AGREGANDO EMPLEADO ===");
-            //int idEmpleado = empleadoABM.agregar("Ana", "García", "87654321", "ana@mail.com", "anita", "abcd");
+            int idEmpleado = empleadoABM.agregar("Ana", "García", "87654332", "ana@mail.com", "anita", "abcd");
             //int idEmpleado = empleadoABM.agregar("Maria", "Lopez", "12345679", "maria@mail.com", "mary", "cxfg");
             //int empleadoInv = empleadoABM.agregar("1234", "!!!!", "0", "zzzzzz", "mary", "cxfg");
 
@@ -56,9 +56,9 @@ public class TestABM {
         
             
         	System.out.println("=== AGREGANDO ADMINISTRADOR ===");
-        	 //int idAdministrador = administradorABM.agregar("Ricardo", "Perez", "34642378", "ricardo@mail.com", "ricardito", "fghj");
+        	 int idAdministrador = administradorABM.agregar("Ricardo", "Perez", "34642379", "ricardo@mail.com", "ricardito", "fghj");
         	 
-        	 //System.out.println("Administrador agregado con ID: " + idAdministrador);
+        	 System.out.println("Administrador agregado con ID: " + idAdministrador);
         	
         	System.out.println("=== AGREGANDO TICKET ===");
         	
@@ -66,7 +66,7 @@ public class TestABM {
         	Empleado empleadoTest = empleadoABM.traer("23586453");
         	
         	
-        	int idTicket = ticketABM.agregar("test", "t", LocalDate.of(2025, 5, 10), usuarioTest, null);
+        	int idTicket = ticketABM.agregar("test", "t", LocalDate.of(2025, 5, 10), usuarioTest, empleadoTest);
         	//int ticketInv = ticketABM.agregar("3333", "!!!!", LocalDate.of(2025, 5, 10), usuarioTest, null);
         	
         	 System.out.println("Ticket agregado con ID: " + idTicket);

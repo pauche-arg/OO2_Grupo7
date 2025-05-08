@@ -29,34 +29,7 @@ public class TicketDao {
 	public int agregar(Ticket objeto) {
 		int id = 0;
 		try {
-			iniciaOperacion();
-			
-			UsuarioDao usuarioDao = new UsuarioDao();
-			EmpleadoDao empleadoDao = new EmpleadoDao();
-			
-			Usuario usuario = null;
-			Empleado empleado = null;
-	       
-	        
-	        try { 
-	        if (objeto.getUsuarioCreador() != null) {
-	            Integer idUsuario = objeto.getUsuarioCreador().getIdUsuario();
-	            usuario = usuarioDao.traer(idUsuario);
-	            objeto.setUsuarioCreador(usuario);
-	        }
-	        } catch (HibernateException he) {
-	        	manejaExcepcion(he);
-	        }
-	        if (objeto.getEmpleadoAsignado() != null) {
-	            Integer idEmpleado = objeto.getEmpleadoAsignado().getIdUsuario();
-	            empleado = empleadoDao.traer(idEmpleado);
-	            objeto.setEmpleadoAsignado(empleado); // puede seguir siendo null si no lo encuentra, dado que cuando los ticket son creados pueden no tener un empleado asignado a el
-	        } else {
-	            objeto.setEmpleadoAsignado(null);
-	        }
-			
-			objeto.setUsuarioCreador(usuario);
-			
+			iniciaOperacion();			
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
 		} catch (HibernateException he) {
@@ -71,35 +44,6 @@ public class TicketDao {
 	public void actualizar(Ticket objeto) {
 		try {
 			iniciaOperacion();
-			
-			UsuarioDao usuarioDao = new UsuarioDao();
-			EmpleadoDao empleadoDao = new EmpleadoDao();
-			
-			Usuario usuario = null;
-			Empleado empleado = null;
-			
-			   try { 
-			        if (objeto.getUsuarioCreador() != null) {
-			            Integer idUsuario = objeto.getUsuarioCreador().getIdUsuario();
-			            usuario = usuarioDao.traer(idUsuario);
-			            objeto.setUsuarioCreador(usuario);
-			        }
-			        } catch (HibernateException he) {
-			        	manejaExcepcion(he);
-			        }
-			        if (objeto.getEmpleadoAsignado() != null) {
-			            Integer idEmpleado = objeto.getEmpleadoAsignado().getIdUsuario();
-			            empleado = empleadoDao.traer(idEmpleado);
-			            objeto.setEmpleadoAsignado(empleado);
-			        } else {
-			            objeto.setEmpleadoAsignado(null);
-			        }
-					
-					objeto.setUsuarioCreador(usuario);
-			
-			objeto.setUsuarioCreador(usuario);
-			objeto.setEmpleadoAsignado(empleado);
-			
 			session.update(objeto);
 			tx.commit();
 		} catch (HibernateException he) {

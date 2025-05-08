@@ -9,14 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.TicketDao;
+import dao.UsuarioDao;
+import dao.EmpleadoDao;
 
 public class TicketABM {
 	TicketDao dao = new TicketDao();
+	UsuarioDao usuarioDao = new UsuarioDao();
+	EmpleadoDao empleadoDao = new EmpleadoDao();
 
 	
 	public int agregar(String titulo, String descripcion, LocalDate fechaCreacion,
 			Usuario usuarioCreador, Empleado empleadoAsignado) throws Exception {
-		Ticket c = new Ticket(titulo, descripcion, fechaCreacion, usuarioCreador, empleadoAsignado); //empleadoAsignado puede ser null
+		
+		 Usuario usuario = usuarioDao.traer(usuarioCreador.getIdUsuario());
+		 Empleado empleado = null;
+		 
+		 if (empleadoAsignado != null) {
+		        empleado = empleadoDao.traer(empleadoAsignado.getIdUsuario());
+		    }
+		 
+		Ticket c = new Ticket(titulo, descripcion, fechaCreacion, usuario, empleado); //empleadoAsignado puede ser null
 		return dao.agregar(c);
 	}
 	
