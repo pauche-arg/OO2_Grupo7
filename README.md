@@ -8,6 +8,7 @@ Para configurar las variables de entorno.
    Crear una BD con el nombre 'bd-OO2-Grupo7'.
 
 Para configurar las librerias necesarias.
+
 5. Click derecho en el proyecto y entrar a la opcion "Properties"
 6. Ir a la pestaña que dice "Java Build Path" y seleccionar "Libraries"
 7. Seleccionar "Classpath" y dar la opcion de "Add External JARs"
