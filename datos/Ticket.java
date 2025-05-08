@@ -13,15 +13,59 @@ public class Ticket {
 	
 	public Ticket() {}
 	
-	public Ticket(String titulo, String descripcion, LocalDate fechaCreacion, String estado,
-			Usuario usuarioCreador, Empleado empleadoAsignado) {
+	public Ticket(String titulo, String descripcion, LocalDate fechaCreacion,
+			Usuario usuarioCreador, Empleado empleadoAsignado) throws Exception {
+		validarTitulo(titulo);
+		validarDescripcion(descripcion);
+		validarUsuario(usuarioCreador);
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaCreacion = fechaCreacion;
-		this.estado = estado;
+		this.estado = "Pendiente";
 		this.usuarioCreador = usuarioCreador;
 		this.empleadoAsignado = empleadoAsignado;
 	}
+	
+	public static void validarTitulo(String titulo) throws Exception {
+		 if (titulo == null ||titulo.trim().isEmpty()) {
+		        throw new Exception("El título no puede estar vacío.");
+		    }
+		 
+		 if (!titulo.matches(".*[a-zA-Z].*")) {
+			    throw new Exception("El título debe contener al menos una letra.");
+			}
+	}
+	
+	public static void validarDescripcion(String descripcion) throws Exception {
+		 if (descripcion == null || descripcion.trim().isEmpty()) {
+		        throw new Exception("La descripción no puede estar vacía.");
+		    }
+		 
+		 if (!descripcion.matches(".*[a-zA-Z].*")) {
+			    throw new Exception("La descripción debe contener al menos una letra.");
+			}
+	}
+	
+	public static void validarUsuario(Usuario usuario) throws Exception {
+		if (usuario == null) {
+	        throw new Exception("Debe especificarse un usuario creador para el ticket.");
+	    }
+	}
+	
+	public static void validarEstado(String estado) throws Exception {
+	    if (estado == null || estado.trim().isEmpty()) {
+	        throw new Exception("El estado no puede estar vacío.");
+	    }
+
+	    String estadoNormalizado = estado.trim().toLowerCase();
+
+	    if (!(estadoNormalizado.equals("pendiente") || 
+	          estadoNormalizado.equals("en proceso") || 
+	          estadoNormalizado.equals("resuelto"))) {
+	        throw new Exception("El estado debe ser: Pendiente, En proceso o Resuelto.");
+	    }
+	}
+	
 
 	public int getIdTicket() {
 		return idTicket;
@@ -36,7 +80,8 @@ public class Ticket {
 	}
 
 	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+		
+	 this.titulo = titulo;
 	}
 
 	public String getDescripcion() {
@@ -44,7 +89,8 @@ public class Ticket {
 	}
 
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		
+	 this.descripcion = descripcion;
 	}
 
 	public LocalDate getFechaCreacion() {
@@ -60,7 +106,8 @@ public class Ticket {
 	}
 
 	public void setEstado(String estado) {
-		this.estado = estado;
+
+	    this.estado = estado;
 	}
 
 	public Usuario getUsuarioCreador() {

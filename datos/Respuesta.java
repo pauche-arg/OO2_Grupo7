@@ -11,10 +11,29 @@ public class Respuesta {
 	
 	public Respuesta() {}
 	
-	public Respuesta(String contenido, LocalDate fecha, Ticket ticket) {
+	public Respuesta(String contenido, LocalDate fecha, Ticket ticket) throws Exception {
+		validarContenido(contenido);
+		validarTicket(ticket);
 		this.contenido = contenido;
 		this.fecha = fecha;
 		this.ticket = ticket;
+	}
+	
+	public static void validarContenido(String contenido) throws Exception {
+		 if (contenido == null ||contenido.trim().isEmpty()) {
+		        throw new Exception("El contenido de la respuesta no puede estar vacía.");
+		    }
+		 
+		 if (!contenido.matches(".*[a-zA-Z].*")) {
+			    throw new Exception("El contenido de la respuesta debe contener al menos una letra.");
+			}
+	}
+	
+	
+	public static void validarTicket(Ticket ticket) throws Exception {
+	    if (ticket == null) {
+	        throw new Exception("Debe especificarse un ticket para la respuesta.");
+	    }
 	}
 
 	public int getIdRespuesta() {

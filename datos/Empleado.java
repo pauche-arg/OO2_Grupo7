@@ -9,7 +9,7 @@ public class Empleado extends Usuario {
 	public Empleado() {}
 
 	public Empleado(String nombre, String apellido, String dni, String email,
-			String nombreUsuario, String contraseña) {
+			String nombreUsuario, String contraseña) throws Exception {
 		super(nombre, apellido, dni, email, nombreUsuario, contraseña);
 		this.tickets = new ArrayList<Ticket>();
 	}

@@ -31,8 +31,6 @@ public class TicketDao {
 		try {
 			iniciaOperacion();
 			
-			System.out.println(objeto.getUsuarioCreador());
-			
 			UsuarioDao usuarioDao = new UsuarioDao();
 			EmpleadoDao empleadoDao = new EmpleadoDao();
 			
@@ -52,7 +50,7 @@ public class TicketDao {
 	        if (objeto.getEmpleadoAsignado() != null) {
 	            Integer idEmpleado = objeto.getEmpleadoAsignado().getIdUsuario();
 	            empleado = empleadoDao.traer(idEmpleado);
-	            objeto.setEmpleadoAsignado(empleado); // puede seguir siendo null si no lo encuentra, dado que cuando los ticket son creados pueden no tener un empleado asignado ae el
+	            objeto.setEmpleadoAsignado(empleado); // puede seguir siendo null si no lo encuentra, dado que cuando los ticket son creados pueden no tener un empleado asignado a el
 	        } else {
 	            objeto.setEmpleadoAsignado(null);
 	        }
@@ -92,7 +90,7 @@ public class TicketDao {
 			        if (objeto.getEmpleadoAsignado() != null) {
 			            Integer idEmpleado = objeto.getEmpleadoAsignado().getIdUsuario();
 			            empleado = empleadoDao.traer(idEmpleado);
-			            objeto.setEmpleadoAsignado(empleado); // puede seguir siendo null si no lo encuentra, dado que cuando los ticket son creados pueden no tener un empleado asignado ae el
+			            objeto.setEmpleadoAsignado(empleado);
 			        } else {
 			            objeto.setEmpleadoAsignado(null);
 			        }

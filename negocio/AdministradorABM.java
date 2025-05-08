@@ -24,18 +24,12 @@ public class AdministradorABM extends UsuarioABM {
 	@Override
 	public int agregar(String nombre, String apellido, String dni, String email,
 			String nombreUsuario, String contraseña) throws Exception {
-		if (!(validarCampos(nombre, apellido, nombreUsuario, dni, email))) throw new Exception("Error en la validación de datos de Administrador.");
 		if (traer(dni) != null) throw new Exception("Error: Un administrador con este DNI ya existe.");
 		Administrador c = new Administrador(nombre, apellido, dni, email, nombreUsuario, contraseña); //contraseña luego iria encriptado
 		return dao.agregar(c);
 	}
 	
 	public void modificar(Administrador c) throws Exception {
-		try {
-			validarCampos(c.getNombre(), c.getApellido(), c.getNombreUsuario(), c.getDni(), c.getEmail());
-		} catch (Exception e) {
-		    throw new Exception("Error: " + e.getMessage());
-		}
 		dao.actualizar(c);
 	}
 	

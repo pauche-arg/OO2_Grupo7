@@ -16,39 +16,6 @@ public class UsuarioABM {
 	public Usuario traer(String dni) {
 		return dao.traer(dni);
 	}
-	
-	public static boolean validarCampos(String nombre, String apellido, String nombreUsuario, String dni, String email) {
-		try {
-			
-			validarNombreApellido(nombre, apellido);
-			validarNombreUsuario(nombreUsuario);
-			validarDNI(dni);
-			validarEmail(email);
-	    
-			return true;
-		} catch (Exception e) {
-			System.err.println("Error de validación: " + e.getMessage());
-			
-			return false;
-		}
-	}
-	
-	//Valida un nombre o apellido
-	public static void validarNombreApellido(String nombre, String apellido) throws Exception {
-		if (nombre == null || nombre.trim().isEmpty()) {
-	        throw new Exception("El nombre no puede estar vacío.");
-	    }
-	    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")) {
-	        throw new Exception("El nombre contiene caracteres inválidos.");
-	    }
-
-	    if (apellido == null || apellido.trim().isEmpty()) {
-	        throw new Exception("El apellido no puede estar vacío.");
-	    }
-	    if (!apellido.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")) {
-	        throw new Exception("El apellido contiene caracteres inválidos.");
-	    }
-	}
 	    
 	//Valida un nombre de usuario. No puede empezar con un guion bajo, un numero o tener menos de 3 caracteres.
 	public static void validarNombreUsuario(String nombreUsuario) throws Exception {
@@ -71,25 +38,12 @@ public class UsuarioABM {
 	
 	public int agregar(String nombre, String apellido, String dni, String email,
 			String nombreUsuario, String contraseña) throws Exception {
-		if (!(validarCampos(nombre, apellido, nombreUsuario, dni, email))) throw new Exception("Error en la validación de datos de Usuario.");
 		if (traer(dni) != null) throw new Exception("Error: Un usuario con este DNI ya existe.");
-			try {
-				validarCampos(nombre, apellido, nombreUsuario, dni, email);
-			} catch (Exception e) {
-			    throw new Exception("Error: " + e.getMessage());
-			}
-			
-			if (traer(dni) != null) throw new Exception("Error: Ya hay un usuario con ese DNI.");
-		Usuario c = new Usuario(nombre, apellido, dni, email, nombreUsuario, contraseña); //contraseña luego iria encriptado
+			Usuario c = new Usuario(nombre, apellido, dni, email, nombreUsuario, contraseña); //contraseña luego iria encriptado
 		return dao.agregar(c);
 	}
 	
 	public void modificar(Usuario c) throws Exception {
-		try {
-			validarCampos(c.getNombre(), c.getApellido(), c.getNombreUsuario(), c.getDni(), c.getEmail());
-		} catch (IllegalArgumentException e) {
-		    throw new Exception("Error: " + e.getMessage());
-		}
 		dao.actualizar(c);
 	}
 	
