@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "../hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="datos">
+
+<class name="datos.Usuario" table="usuario">
+    <id column="idUsuario" name="idUsuario">
+      <generator class="identity"/>
+    </id>
+    <property column="nombre" name="nombre" type="string"/>
+    <property column="apellido" name="apellido" type="string"/>
+    <property column="dni" name="dni" type="string"/>
+    <property column="email" name="email" type="string"/>
+    <property column="nombreUsuario" name="nombreUsuario" type="string"/>
+    <property column="contraseña" name="contraseña" type="string"/>
+    
+    <joined-subclass name="Empleado" table="empleado" extends="Usuario">
+       <key column="idUsuario"/>
+    </joined-subclass>
+    
+     <joined-subclass name="Administrador" table="administrador" extends="Usuario">
+        <key column="idUsuario"/>
+    </joined-subclass>
+    
+  </class>    
+</hibernate-mapping>

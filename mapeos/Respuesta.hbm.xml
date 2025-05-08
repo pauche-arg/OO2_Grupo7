@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "../hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="datos">
+
+<class name="datos.Respuesta" table="respuesta">
+    <id column="idRespuesta" name="idRespuesta">
+      <generator class="identity"/>
+    </id>
+    <property column="contenido" name="contenido" type="string"/>
+    <property column="fecha" name="fecha" type="LocalDate"/>
+    
+   <many-to-one name="ticket" class="Ticket" column="idTicket" not-null="true"/>
+  </class>    
+</hibernate-mapping>
