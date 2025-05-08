@@ -12,28 +12,11 @@ import datos.Ticket;
 import datos.Empleado;
 import datos.Usuario;
 
-public class SistemaTickets {
+public class SistemaTicketABM {
 	private TicketABM ticketABM = new TicketABM();
     private UsuarioABM usuarioABM = new UsuarioABM();
     private EmpleadoABM empleadoABM = new EmpleadoABM();
 	
-    
-    public int crearTicket(String titulo, String descripcion, Usuario usuarioCreador) throws Exception {
-        if (usuarioCreador == null) throw new Exception("El usuario creador no puede ser null.");
-        
-        Ticket.validarTitulo(titulo);
-        Ticket.validarDescripcion(descripcion);
-        
-        Ticket ticket = new Ticket(
-                titulo,
-                descripcion,
-                LocalDate.now(),
-                usuarioCreador,
-                null // aún no asignado
-            );
-        
-       return ticketABM.agregar(ticket);
-    }
 	//Empleado y Administrador pueden acceder a este metodo
 	public void cambiarEstado(int idTicket, String nuevoEstado) throws Exception {
 	Ticket ticket = ticketABM.traerTicket(idTicket);

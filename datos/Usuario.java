@@ -81,7 +81,7 @@ public class Usuario extends Persona {
 	
 	@Override
 	public String toString() {
-		return "Usuario [nombreUsuario=" + nombreUsuario + ", contraseña=" + contraseña + "]";
+		return "Usuario [nombreUsuario=" + nombreUsuario + ", contraseña=" + contraseña + "]\n";
 	}
 
 	@Override

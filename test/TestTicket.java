@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import datos.Ticket;
 import datos.Usuario;
-import negocio.SistemaTickets;
+import negocio.SistemaTicketABM;
 import datos.Empleado;
 import negocio.TicketABM;
 import negocio.UsuarioABM;
@@ -15,11 +15,11 @@ public class TestTicket {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		try { 
+		/*try { 
 			UsuarioABM usuarioABM = new UsuarioABM();
 			TicketABM ticketABM = new TicketABM();
 			EmpleadoABM empleadoABM = new EmpleadoABM();
-			SistemaTickets sistemaTicket = new SistemaTickets();
+			SistemaTicketABM sistemaTicket = new SistemaTicketABM();
 			
 			//Empleado empleadoTest = new Empleado("Ana", "García", "87654321", "ana@mail.com", "anita", "abcd");
 			
@@ -64,7 +64,7 @@ public class TestTicket {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 

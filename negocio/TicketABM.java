@@ -16,24 +16,10 @@ public class TicketABM {
 	TicketDao dao = new TicketDao();
 	UsuarioDao usuarioDao = new UsuarioDao();
 	EmpleadoDao empleadoDao = new EmpleadoDao();
-
 	
-	public int agregar(String titulo, String descripcion, LocalDate fechaCreacion,
-			Usuario usuarioCreador, Empleado empleadoAsignado) throws Exception {
-		
-		 Usuario usuario = usuarioDao.traer(usuarioCreador.getIdUsuario());
-		 Empleado empleado = null;
-		 
-		 if (empleadoAsignado != null) {
-		        empleado = empleadoDao.traer(empleadoAsignado.getIdUsuario());
-		    }
-		 
-		Ticket c = new Ticket(titulo, descripcion, fechaCreacion, usuario, empleado); //empleadoAsignado puede ser null
-		return dao.agregar(c);
-	}
-	
-	public int agregar(Ticket ticket) throws Exception {
-		return dao.agregar(ticket);
+	public int generarTicket(String titulo, String descripcion, Usuario usuarioCreador) throws Exception {
+		Ticket t = new Ticket(titulo, descripcion, LocalDate.now(), usuarioCreador, null);
+		return dao.agregar(t);
 	}
 	
 	

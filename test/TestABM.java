@@ -12,7 +12,7 @@ public class TestABM {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		UsuarioABM usuarioABM = new UsuarioABM();
+		/*UsuarioABM usuarioABM = new UsuarioABM();
         EmpleadoABM empleadoABM = new EmpleadoABM();
         AdministradorABM administradorABM = new AdministradorABM();
         TicketABM ticketABM = new TicketABM();
@@ -85,7 +85,7 @@ public class TestABM {
         } catch (Exception e) {
             System.out.println("Error durante test: " + e.getMessage());
             e.printStackTrace();
-        }
+        }*/
         
         
         

@@ -24,7 +24,7 @@ public class Empleado extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Empleado" + super.toString() + "[tickets=" + tickets + "]";
+		return "Empleado" + super.toString() + "[tickets=" + tickets + "]\n";
 	}
 	
 	
