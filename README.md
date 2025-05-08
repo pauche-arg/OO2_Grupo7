@@ -9,7 +9,7 @@ Para configurar las variables de entorno.
 
 Para configurar las librerias necesarias.
 
-5. Click derecho en el proyecto y entrar a la opcion "Properties"
-6. Ir a la pestaña que dice "Java Build Path" y seleccionar "Libraries"
-7. Seleccionar "Classpath" y dar la opcion de "Add External JARs"
+5. Click derecho en el proyecto -> 'Properties'
+6. Ir a la pestaña 'Java Build Path' -> 'Libraries'
+7. Seleccionar 'Classpath' y dar la opcion de 'Add External JARs'
 8. Entrar a la carpeta "lib" y seleccionar todas las librerias dentro de la carpeta
