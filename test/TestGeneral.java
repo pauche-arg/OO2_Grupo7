@@ -30,6 +30,7 @@ public class TestGeneral {
 			System.out.println(usuarioAbm.traerUsuarios());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error durante test: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -45,6 +46,7 @@ public class TestGeneral {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error durante test: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -54,6 +56,7 @@ public class TestGeneral {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error durante test: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -69,6 +72,7 @@ public class TestGeneral {
 			System.out.println(sistemaAbm.consultarDetallesTicket(1, 1));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error durante test: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -81,6 +85,7 @@ public class TestGeneral {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error durante test: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
