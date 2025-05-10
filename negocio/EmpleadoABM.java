@@ -48,10 +48,6 @@ public class EmpleadoABM extends UsuarioABM {
 	public List<Empleado> traerEmpleados() {
 		return dao.traer();
 	}
-	
-	public void cambiarEstado(int idticket, Empleado emp) throws Exception {
-		dao.cambiarEstado(idticket, emp);
-	}
 
 
 }

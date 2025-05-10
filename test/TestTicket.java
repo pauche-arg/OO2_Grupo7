@@ -6,6 +6,7 @@ import datos.Ticket;
 import datos.Usuario;
 import negocio.SistemaTickets;
 import datos.Empleado;
+import datos.EstadoTicket;
 import negocio.TicketABM;
 import negocio.UsuarioABM;
 import negocio.EmpleadoABM;
@@ -27,13 +28,13 @@ public class TestTicket {
 			
 			Empleado empleadoTest = empleadoABM.traer("87654321");
 			Usuario usuarioTest = usuarioABM.traer("12345678");
-			Ticket ticketTest = new Ticket("a", "bbb", LocalDate.of(2025, 5, 10), usuarioTest, null);
+			Ticket ticketTest = new Ticket("a", "bbb", usuarioTest, null);
 			
-			int idTicket = ticketABM.agregar("Test Ticket 1", "123", LocalDate.of(2025, 5, 11), usuarioTest, empleadoTest);
+			int idTicket = ticketABM.agregar("Test Ticket 1", "123", usuarioTest, empleadoTest);
 			
 			System.out.println("Ticket agregado con ID: " + idTicket);
 			
-			sistemaTicket.cambiarEstado(idTicket, "Resuelto");
+			sistemaTicket.cambiarEstado(idTicket, EstadoTicket.RESUELTO);
 			
 			System.out.println(ticketABM.traerTickets());
 			

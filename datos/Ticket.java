@@ -7,21 +7,21 @@ public class Ticket {
 	private String titulo;
 	private String descripcion;
 	private LocalDate fechaCreacion;
-	private String estado;
+	private EstadoTicket estado;
 	private Usuario usuarioCreador;
 	private Empleado empleadoAsignado;
 	
 	public Ticket() {}
 	
-	public Ticket(String titulo, String descripcion, LocalDate fechaCreacion,
+	public Ticket(String titulo, String descripcion,
 			Usuario usuarioCreador, Empleado empleadoAsignado) throws Exception {
 		validarTitulo(titulo);
 		validarDescripcion(descripcion);
 		validarUsuario(usuarioCreador);
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.fechaCreacion = fechaCreacion;
-		this.estado = "Pendiente";
+		this.fechaCreacion = LocalDate.now();
+		this.estado = EstadoTicket.PENDIENTE;
 		this.usuarioCreador = usuarioCreador;
 		this.empleadoAsignado = empleadoAsignado;
 	}
@@ -51,21 +51,6 @@ public class Ticket {
 	        throw new Exception("Debe especificarse un usuario creador para el ticket.");
 	    }
 	}
-	
-	public static void validarEstado(String estado) throws Exception {
-	    if (estado == null || estado.trim().isEmpty()) {
-	        throw new Exception("El estado no puede estar vacío.");
-	    }
-
-	    String estadoNormalizado = estado.trim().toLowerCase();
-
-	    if (!(estadoNormalizado.equals("pendiente") || 
-	          estadoNormalizado.equals("en proceso") || 
-	          estadoNormalizado.equals("resuelto"))) {
-	        throw new Exception("El estado debe ser: Pendiente, En proceso o Resuelto.");
-	    }
-	}
-	
 
 	public int getIdTicket() {
 		return idTicket;
@@ -101,12 +86,11 @@ public class Ticket {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public String getEstado() {
+	public EstadoTicket getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
-
+	public void setEstado(EstadoTicket estado) {
 	    this.estado = estado;
 	}
 
@@ -139,7 +123,7 @@ public class Ticket {
 	}
 	
 	public boolean estaResuelto() {
-		return "resuelto".equalsIgnoreCase(this.estado);
+		return this.getEstado() == EstadoTicket.RESUELTO;
 	}
 	
 	public boolean esDelUsuario(Usuario u) {

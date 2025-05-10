@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import datos.Administrador;
 import datos.Usuario;
 import datos.Empleado;
+import datos.EstadoTicket;
 import datos.Ticket;
 import datos.Usuario;
 import negocio.TicketABM;
@@ -108,7 +109,7 @@ public class AdministradorDao {
 	public void asignarTicket(int idticket, Empleado emp) throws Exception {
 		TicketABM abmti = new TicketABM();
 		Ticket t = abmti.traerTicket(idticket);
-		if(t.getEstado().equalsIgnoreCase("resuelto"))throw new Exception("El ticket ya esta resuelto");
+		if(t.getEstado() == EstadoTicket.RESUELTO) throw new Exception("El ticket ya esta resuelto");
 		t.setEmpleadoAsignado(emp);
 		abmti.modificar(t);
 		System.out.println(t);

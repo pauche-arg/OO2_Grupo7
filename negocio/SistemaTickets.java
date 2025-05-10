@@ -10,6 +10,7 @@ import negocio.UsuarioABM;
 
 import datos.Ticket;
 import datos.Empleado;
+import datos.EstadoTicket;
 import datos.Usuario;
 
 public class SistemaTickets {
@@ -19,26 +20,20 @@ public class SistemaTickets {
 	
     
     public int crearTicket(String titulo, String descripcion, Usuario usuarioCreador) throws Exception {
-        if (usuarioCreador == null) throw new Exception("El usuario creador no puede ser null.");
-        
-        Ticket.validarTitulo(titulo);
-        Ticket.validarDescripcion(descripcion);
-        
         Ticket ticket = new Ticket(
                 titulo,
                 descripcion,
-                LocalDate.now(),
                 usuarioCreador,
                 null // aún no asignado
             );
         
        return ticketABM.agregar(ticket);
     }
+    
 	//Empleado y Administrador pueden acceder a este metodo
-	public void cambiarEstado(int idTicket, String nuevoEstado) throws Exception {
+	public void cambiarEstado(int idTicket, EstadoTicket nuevoEstado) throws Exception {
 	Ticket ticket = ticketABM.traerTicket(idTicket);
 	    if (ticket == null) throw new Exception("Ticket no encontrado.");
-	    ticket.validarEstado(nuevoEstado);
 	    ticket.setEstado(nuevoEstado);
 	    ticketABM.modificar(ticket);
 	}
@@ -66,6 +61,8 @@ public class SistemaTickets {
 
 	    return ticket;
 	}
+	
+	
 	
 	public Ticket traerTicket(int idTicket) {
 		return ticketABM.traerTicket(idTicket);

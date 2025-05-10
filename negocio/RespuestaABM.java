@@ -13,8 +13,8 @@ public class RespuestaABM {
 
 	
 	
-	public int agregar(String contenido, LocalDate fecha, Ticket ticket) throws Exception {
-		Respuesta c = new Respuesta(contenido, fecha, ticket);
+	public int agregar(String contenido, Ticket ticket) throws Exception {
+		Respuesta c = new Respuesta(contenido, ticket);
 		return dao.agregar(c);
 	}
 	

@@ -11,11 +11,11 @@ public class Respuesta {
 	
 	public Respuesta() {}
 	
-	public Respuesta(String contenido, LocalDate fecha, Ticket ticket) throws Exception {
+	public Respuesta(String contenido, Ticket ticket) throws Exception {
 		validarContenido(contenido);
 		validarTicket(ticket);
 		this.contenido = contenido;
-		this.fecha = fecha;
+		this.fecha = LocalDate.now();
 		this.ticket = ticket;
 	}
 	
@@ -71,11 +71,6 @@ public class Respuesta {
 	@Override
 	public String toString() {
 		return "Respuesta [contenido=" + contenido + ", fecha=" + fecha + ", ticket=" + ticket + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(contenido, fecha, idRespuesta, ticket);
 	}
 
 	@Override

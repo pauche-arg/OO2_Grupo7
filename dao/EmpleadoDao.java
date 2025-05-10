@@ -103,13 +103,4 @@ public class EmpleadoDao {
 		}
 		return lista;
 	}
-	
-	public void cambiarEstado(int ticket, Empleado emp) throws Exception{
-		TicketABM abm = new TicketABM();
-		Ticket t = abm.traerTicket(ticket);
-		if(t.getEmpleadoAsignado().getIdUsuario()!=emp.getIdUsuario())throw new Exception("Este empleado no esta acargo del ticket");	
-		t.setEstado("resuelto");
-		abm.modificar(t);
-		System.out.println("Se cambio con exito");
-	}
 }
