@@ -19,16 +19,11 @@ public class TicketABM {
 
 	
 	public int agregar(String titulo, String descripcion,
-			Usuario usuarioCreador, Empleado empleadoAsignado) throws Exception {
+			Usuario usuarioCreador) throws Exception {
 		
 		 Usuario usuario = usuarioDao.traer(usuarioCreador.getIdUsuario());
-		 Empleado empleado = null;
 		 
-		 if (empleadoAsignado != null) {
-		        empleado = empleadoDao.traer(empleadoAsignado.getIdUsuario());
-		    }
-		 
-		Ticket c = new Ticket(titulo, descripcion, usuario, empleado); //empleadoAsignado puede ser null
+		Ticket c = new Ticket(titulo, descripcion, usuario); //empleadoAsignado puede ser null
 		return dao.agregar(c);
 	}
 	
@@ -75,24 +70,6 @@ public class TicketABM {
 		
 		for (Ticket ticket : traerTickets() ) { 
 			 if (ticket.getUsuarioCreador().getIdUsuario() == idUsuario) {
-		            ticketLista.add(ticket);
-		        }
-		    }
-		
-		return ticketLista;
-		}
-		 
-	public List<Ticket> listarTicketsPorEmpleado(int idEmpleado) throws Exception {
-		EmpleadoABM empleadoABM = new EmpleadoABM();
-		Empleado empleado = empleadoABM.traer(idEmpleado); 
-	
-		
-		if (empleado == null) throw new Exception("Empleado no encontrado.");
-		 
-		List<Ticket> ticketLista = new ArrayList<Ticket>();
-		
-		for (Ticket ticket : traerTickets() ) { 
-			if (ticket.getEmpleadoAsignado() != null && ticket.getEmpleadoAsignado().getIdUsuario() == idEmpleado) {
 		            ticketLista.add(ticket);
 		        }
 		    }

@@ -23,14 +23,14 @@ public class TestABM {
         
         try {
             System.out.println("=== AGREGANDO USUARIO ===");
-            //int idUsuario = usuarioABM.agregar("Juan", "Pérez", "12345678", "juan@mail.com", "juanito", "1234");
+            int idUsuario = usuarioABM.agregar("Juan", "Pérez", "12345678", "juan@mail.com", "juanito", "1234");
             System.out.println(usuarioABM.traerUsuarios());
-            //System.out.println("Usuario agregado con ID: " + idUsuario);
+            System.out.println("Usuario agregado con ID: " + idUsuario);
             
         	System.out.println("=== MODIFICANDO USUARIO ===");
-            //Usuario u = usuarioABM.traer(idUsuario);
-            //u.setEmail("nuevo_correo@mail.com");
-            //usuarioABM.modificar(u);
+            Usuario u = usuarioABM.traer(idUsuario);
+            u.setEmail("nuevo_correo@mail.com");
+            usuarioABM.modificar(u);
             System.out.println("Usuario modificado.");
 
             System.out.println("=== LISTA DE USUARIOS ===");
@@ -48,7 +48,7 @@ public class TestABM {
             //int idEmpleado = empleadoABM.agregar("Maria", "Lopez", "12345679", "maria@mail.com", "mary", "cxfg");
             //int empleadoInv = empleadoABM.agregar("1234", "!!!!", "0", "zzzzzz", "mary", "cxfg");
 
-            System.out.println("Empleado agregado con ID: " + idEmpleado);
+            //System.out.println("Empleado agregado con ID: " + idEmpleado);
             
             //System.out.println("=== ELIMINANDO EMPLEADO ===");
             //empleadoABM.eliminar(idEmpleado);
@@ -63,10 +63,9 @@ public class TestABM {
         	System.out.println("=== AGREGANDO TICKET ===");
         	
         	Usuario usuarioTest = usuarioABM.traer("12345678");
-        	Empleado empleadoTest = empleadoABM.traer("23586453");
         	
         	
-        	int idTicket = ticketABM.agregar("test", "t", usuarioTest, empleadoTest);
+        	int idTicket = ticketABM.agregar("test nuevo", "t", usuarioTest);
         	//int ticketInv = ticketABM.agregar("3333", "!!!!", usuarioTest, null);
         	
         	 System.out.println("Ticket agregado con ID: " + idTicket);

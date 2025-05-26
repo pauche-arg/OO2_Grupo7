@@ -9,14 +9,27 @@
     <property column="titulo" name="titulo" type="string"/>
     <property column="descripcion" name="descripcion" type="string"/>
     <property column="fechaCreacion" name="fechaCreacion" type="LocalDate"/>
+        <property column="fechaCierre" name="fechaCierre" type="LocalDate"/>
     <property name="estado">
         <type name="org.hibernate.type.EnumType">
-            <param name="enumClass">datos.EstadoTicket</param>
+            <param name="enumClass">datos.Estado</param>
             <param name="type">12</param>
         </type>
     </property>
+        <property name="prioridad">
+        <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">datos.Prioridad</param>
+            <param name="type">12</param>
+        </type>
+    </property>
+    
+    <list name="controles" cascade="all-delete-orphan" inverse="true" table="control">
+    <key column="idTicket"/>
+    <index column="list_index"/>
+    <one-to-many class="datos.Control"/>
+    </list>
+    
 	<many-to-one name="usuarioCreador" class="Usuario" column="idUsuario" not-null="true" lazy="false"/>
-		<many-to-one name="empleadoAsignado" class="Empleado" column="idEmpleado" not-null="false"/>
     
 
     

@@ -6,16 +6,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Administrador;
-import datos.Usuario;
+import datos.Control;
 import datos.Empleado;
-import datos.Estado;
 import datos.Ticket;
 import datos.Usuario;
-import negocio.TicketABM;
+import dao.UsuarioDao;
+import dao.EmpleadoDao;
 
-
-public class AdministradorDao {
+public class ControlDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -26,13 +24,13 @@ public class AdministradorDao {
 	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
-		throw new HibernateException("Error en la capa de acceso de datos de EmpleadoDao.", he);
+		throw new HibernateException("Error en la capa de acceso de datos de ControlDao.", he);
 	}
 	
-	public int agregar(Administrador objeto) {
+	public int agregar(Control objeto) {
 		int id = 0;
 		try {
-			iniciaOperacion();
+			iniciaOperacion();			
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
 		} catch (HibernateException he) {
@@ -44,7 +42,7 @@ public class AdministradorDao {
 		return id;
 	}
 	
-	public void actualizar(Administrador objeto) {
+	public void actualizar(Control objeto) {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -57,7 +55,7 @@ public class AdministradorDao {
 		}
 	}
 	
-	public void eliminar(Administrador objeto) {
+	public void eliminar(Control objeto) {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -70,48 +68,40 @@ public class AdministradorDao {
 		}
 	}
 	
-	public Administrador traer(int idUsuario) {
-		Administrador objeto = null;
+	public Control traer(int idControl) {
+		Control objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Administrador) session.get(Administrador.class, idUsuario);
+			objeto = (Control) session.get(Control.class, idControl);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public Administrador traer(String dni) {
-		Administrador objeto = null;
+	public List<Control> traer() throws HibernateException {
+		List<Control> lista = null;
 		try {
 			iniciaOperacion();
-			objeto = (Administrador) session.createQuery("FROM Administrador WHERE dni = :dni")
-									  .setParameter("dni", dni)
-									  .uniqueResult();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-	public List<Administrador> traer() throws HibernateException {
-		List<Administrador> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Administrador c order by c.idUsuario asc",
-					Administrador.class).getResultList();
+			lista = session.createQuery("from Control c order by c.idControl asc",
+					Control.class).getResultList();
 		} finally {
 			session.close();
 		}
 		return lista;
 	}
 	
-	public void asignarTicket(int idticket, Empleado emp) throws Exception {
-		TicketABM abmti = new TicketABM();
-		Ticket t = abmti.traerTicket(idticket);
-		if(t.getEstado() == Estado.RESUELTO) throw new Exception("El ticket ya esta resuelto");
-		//t.setEmpleadoAsignado(emp); //Logica va a tener que ser asignada a través de Control
-		abmti.modificar(t);
-		System.out.println(t);
+	//Mejorar nombre de metodo, filtra de que manera y para que proposito?
+	public List<Control> filtrado(String filtro){
+		List<Control> lista = null;
+		try {
+			iniciaOperacion();
+			String hQL = "from Control t where t.estado =:filtro order by t.idControl asc";
+			lista = session.createQuery(hQL, Control.class).setParameter("filtro", filtro).getResultList();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
+
 }

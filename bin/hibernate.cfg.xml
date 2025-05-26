@@ -15,7 +15,7 @@
 		<!--Mapeo Entidades   -->
 		<mapping resource="mapeos/Usuario.hbm.xml" />
 		<mapping resource="mapeos/Ticket.hbm.xml"/>
-		<mapping resource="mapeos/Respuesta.hbm.xml"/>
+		<mapping resource="mapeos/Control.hbm.xml"/>
 		
 	</session-factory>
 	
