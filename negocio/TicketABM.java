@@ -20,8 +20,8 @@ public class TicketABM {
 	
 	public int agregar(String titulo, String descripcion,
 			Usuario usuarioCreador) throws Exception {
-		
-		 Usuario usuario = usuarioDao.traer(usuarioCreador.getIdUsuario());
+		//Usuario usuario = usuarioDao.traer(usuarioCreador.getIdUsuario());
+		Usuario usuario = usuarioDao.traer(usuarioCreador.getIdPersona());
 		 
 		Ticket c = new Ticket(titulo, descripcion, usuario); //empleadoAsignado puede ser null
 		return dao.agregar(c);
@@ -69,7 +69,8 @@ public class TicketABM {
 		List<Ticket> ticketLista = new ArrayList<Ticket>();
 		
 		for (Ticket ticket : traerTickets() ) { 
-			 if (ticket.getUsuarioCreador().getIdUsuario() == idUsuario) {
+			//if (ticket.getUsuarioCreador().getIdUsuario() == idUsuario)
+			 if (ticket.getUsuarioCreador().getIdPersona() == idUsuario) {
 		            ticketLista.add(ticket);
 		        }
 		    }

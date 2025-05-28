@@ -36,10 +36,10 @@ public class UsuarioABM {
 	    }
 	}
 	
-	public int agregar(String nombre, String apellido, String dni, String email,
-			String nombreUsuario, String contraseña) throws Exception {
+	public int agregar(String nombre, String apellido, String dni, String email, String nombreUsuario, String clave,
+			String nrocliente) throws Exception {
 		if (traer(dni) != null) throw new Exception("Error: Un usuario con este DNI ya existe.");
-			Usuario c = new Usuario(nombre, apellido, dni, email, nombreUsuario, contraseña); //contraseña luego iria encriptado
+			Usuario c = new Usuario(nombre, apellido, dni, email, nombreUsuario, clave, nrocliente); //contraseña luego iria encriptado
 		return dao.agregar(c);
 	}
 	

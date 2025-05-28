@@ -57,7 +57,8 @@ public class ControlABM {
 	
 	public List<Control> listarControlesPorEmpleado(int idEmpleado) throws Exception {
 		EmpleadoABM empleadoABM = new EmpleadoABM();
-		Empleado empleado = empleadoABM.traer(idEmpleado); 
+		//Empleado empleado = empleadoABM.traer(idEmpleado); 
+		Empleado empleado = (Empleado) PersonaABM.getInstance().traerId(idEmpleado);
 	
 		
 		 if (empleado == null) throw new Exception("Empleado no encontrado.");
@@ -65,7 +66,8 @@ public class ControlABM {
 		List<Control> controlLista = new ArrayList<Control>();
 		
 		for (Control control : traerControles() ) { 
-			 if (control.getEmpleado().getIdUsuario() == idEmpleado) {
+			//if (control.getEmpleado().getIdUsuario() == idEmpleado)
+			 if (control.getEmpleado().getIdPersona() == idEmpleado) {
 		            controlLista.add(control);
 		        }
 		    }

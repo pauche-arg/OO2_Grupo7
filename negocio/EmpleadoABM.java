@@ -9,7 +9,7 @@ import dao.EmpleadoDao;
 public class EmpleadoABM extends UsuarioABM {
 	EmpleadoDao dao = new EmpleadoDao();
 	
-	@Override
+	/*@Override
 	public Empleado traer(int idUsuario) {
 		return dao.traer(idUsuario);
 	}
@@ -47,7 +47,7 @@ public class EmpleadoABM extends UsuarioABM {
 	
 	public List<Empleado> traerEmpleados() {
 		return dao.traer();
-	}
+	}*/
 
 
 }

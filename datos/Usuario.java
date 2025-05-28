@@ -4,22 +4,20 @@ import java.util.Objects;
 
 public class Usuario extends Persona {
 
-	private int idUsuario;
-	private String nombreUsuario;
-	private String contraseña;
+	//private int idUsuario;
+	//private String nombreUsuario;
+	//private String contraseña;
+	private String nrocliente;
 	
 	public Usuario(){}
 	
-	public Usuario(String nombre, String apellido, String dni, String email,
-			String nombreUsuario, String contraseña) throws Exception {
-		super(nombre, apellido, dni, email);
-		validarNombreApellido(nombre, apellido);
-		validarNombreUsuario(nombreUsuario);
-		validarEmail(email);
-		validarDNI(dni);
-		this.nombreUsuario = nombreUsuario;
-		this.contraseña = contraseña;
+
+	public Usuario(String nombre, String apellido, String dni, String email, String nombreUsuario, String clave,
+			String nrocliente) throws Exception {
+		super(nombre, apellido, dni, email, nombreUsuario, clave);
+		this.nrocliente = nrocliente;
 	}
+	
 	
 	public static void validarNombreApellido(String nombre, String apellido) throws Exception {
 		if (nombre == null || nombre.trim().isEmpty()) {
@@ -54,8 +52,10 @@ public class Usuario extends Persona {
 	        throw new Exception("DNI inválido.");
 	    }
 	}
+	
+	
 
-	public int getIdUsuario() {
+	/*public int getIdUsuario() {
 		return idUsuario;
 	}
 
@@ -77,28 +77,43 @@ public class Usuario extends Persona {
 
 	private void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
-	}
+	}*/
 	
+	public String getNrocliente() {
+		return nrocliente;
+	}
+
+
+	public void setNrocliente(String nrocliente) {
+		this.nrocliente = nrocliente;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Usuario [nombreUsuario=" + nombreUsuario + ", contraseña=" + contraseña + "]";
+		return "Usuario [nrocliente=" + nrocliente + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(contraseña, idUsuario, nombreUsuario);
+		return Objects.hash(nrocliente);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null || getClass() != obj.getClass()) return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(contraseña, other.contraseña) && idUsuario == other.idUsuario
-				&& Objects.equals(nombreUsuario, other.nombreUsuario);
+		return Objects.equals(nrocliente, other.nrocliente);
 	}
+
 	
-	
-	
+
 	
 }

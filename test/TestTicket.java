@@ -31,7 +31,7 @@ public class TestTicket {
 			
 			//traer por usuario
 			 System.out.println("=== TRAER TICKETS POR USUARIO ===");
-			int idUsuario = usuarioTest.getIdUsuario();
+			int idUsuario = usuarioTest.getIdPersona();
 			System.out.println(ticketABM.listarTicketsPorUsuario(idUsuario));
 			
 			

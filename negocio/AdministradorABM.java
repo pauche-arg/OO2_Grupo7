@@ -9,7 +9,7 @@ import java.util.List;
 import dao.AdministradorDao;
 
 public class AdministradorABM extends UsuarioABM {
-	AdministradorDao dao = new AdministradorDao();
+	/*AdministradorDao dao = new AdministradorDao();
 	
 	@Override
 	public Administrador traer(int idUsuario) {
@@ -53,7 +53,7 @@ public class AdministradorABM extends UsuarioABM {
 	
 	public void asignarTicket(int idticket, Empleado emp) throws Exception {
 		dao.asignarTicket(idticket, emp);
-	}
+	}*/
 
 
 }

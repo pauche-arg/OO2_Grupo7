@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "../hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="datos">
+
+<class name="datos.Area" table="area">
+    <id column="idArea" name="idArea">
+      <generator class="identity"/>
+    </id>
+    <property column="nombre" name="nombre" type="string"/>
+    <property column="descripcion" name="descripcion" type="string"/>
+     <set name="empleados" inverse="true" cascade="all">
+	    <key column="idArea"/>
+	    <one-to-many class="Empleado"/>
+     </set>
+  </class>
+</hibernate-mapping>

@@ -1,11 +1,10 @@
 package datos;
 
-public class Administrador extends Usuario {	
+public class Administrador extends Persona {	
 	public Administrador(){}
 
-	public Administrador(String nombre, String apellido, String dni, String email, String nombreUsuario,
-			String contraseña) throws Exception {
-		super(nombre, apellido, dni, email, nombreUsuario, contraseña);
+	public Administrador(String nombre, String apellido, String dni, String email, String nombreUsuario, String clave) throws Exception {
+		super(nombre, apellido, dni, email, nombreUsuario, clave);
 	}
 
 	@Override

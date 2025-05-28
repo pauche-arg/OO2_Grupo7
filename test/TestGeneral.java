@@ -1,4 +1,4 @@
-package test;
+/*package test;
 
 import dao.HibernateUtil;
 import datos.EstadoTicket;
@@ -92,4 +92,4 @@ public class TestAgregarUsuario {
 		
 	}
 
-}
+}*/

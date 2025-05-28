@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping SYSTEM "../hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="datos">
 
-<class name="datos.Usuario" table="usuario">
-    <id column="idUsuario" name="idUsuario">
+<class name="datos.Persona" table="persona">
+    <id column="idPersona" name="idPersona">
       <generator class="identity"/>
     </id>
     <property column="nombre" name="nombre" type="string"/>
@@ -11,14 +11,18 @@
     <property column="dni" name="dni" type="string"/>
     <property column="email" name="email" type="string"/>
     <property column="nombreUsuario" name="nombreUsuario" type="string"/>
-    <property column="contraseña" name="contraseña" type="string"/>
+    <property column="clave" name="clave" type="string"/>
     
-    <joined-subclass name="Empleado" table="empleado" extends="Usuario">
-       <key column="idUsuario"/>
+    <joined-subclass name="Empleado" table="empleado" extends="Persona">
+       <key column="idPersona"/>
+       <property column="disponibilidad" name="disponibilidad" type="boolean"/>
+       <property column="superior" name="superior" type="boolean"/>
+       <many-to-one name="area" class="Area" column="idArea" not-null="true"/>   
     </joined-subclass>
     
-     <joined-subclass name="Administrador" table="administrador" extends="Usuario">
-        <key column="idUsuario"/>
+     <joined-subclass name="Usuario" table="usuario" extends="Persona">
+        <key column="idPersona"/>
+        <property column="nrocliente" name="nrocliente" type="string"/>
     </joined-subclass>
     
   </class>    
